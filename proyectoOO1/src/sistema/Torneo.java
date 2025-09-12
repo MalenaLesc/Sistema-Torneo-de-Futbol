@@ -1,5 +1,6 @@
 package sistema;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,10 +27,10 @@ public class Torneo {
 			this.idTorneo = idTorneo;
 			this.nombreTorneo = nombreTorneo;
 			this.temporada = temporada;
-			this.equipos = equipos;
+			this.equipos = new ArrayList<Equipo>();
 			this.fechaInicio = fechaInicio;
 			this.fechaFin = fechaFin;
-			this.partidos = partidos;
+			this.partidos = new ArrayList<Partido>();
 		}
 
 
@@ -112,6 +113,14 @@ public class Torneo {
 			this.partidos = partidos;
 		}
 	    
+	    public boolean agregarEquipo(String nombreEquipo, String idEquipo, Entrenador entrenador1) {
+	    	Equipo equipo1 = new Equipo(nombreEquipo, idEquipo, entrenador1);
+	    	return equipos.add(equipo1);
+	    }
 	    
-
+	    public boolean agregarPartido(Date fechaPartido, Equipo local, Equipo visitante, String estadio, int idPartido) {
+	    	Partido partido1 = new Partido(fechaPartido, local, visitante, estadio, idPartido);
+	    	return partidos.add(partido1);
+	    }
+	    
 }

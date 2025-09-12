@@ -1,5 +1,7 @@
 package sistema;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Equipo {
@@ -9,16 +11,13 @@ public class Equipo {
     private List<Jugador> jugadores;
     private Entrenador entrenador;
     
-    
-    
-	public Equipo() {}
 	
 	
-	public Equipo(String nombreEquipo, String idEquipo, List<Jugador> jugadores, Entrenador entrenador) {
+	public Equipo(String nombreEquipo, String idEquipo, Entrenador entrenador) {
 		super();
 		this.nombreEquipo = nombreEquipo;
 		IdEquipo = idEquipo;
-		this.jugadores = jugadores;
+		this.jugadores = new ArrayList<>();
 		this.entrenador = entrenador;
 	}
 	@Override
@@ -51,6 +50,12 @@ public class Equipo {
 		this.entrenador = entrenador;
 	}
     
-    
+    public boolean agregarJugador(String apellido, String nombre, int dni, Date fechaNacimiento, float estatura, float peso,
+    		String posicion, int camiseta) {
+    	
+    	Jugador jug1 = new Jugador(apellido, nombre, dni, fechaNacimiento, estatura, peso, posicion, camiseta);
+    	return jugadores.add(jug1);
+    	
+    }
 
 }
