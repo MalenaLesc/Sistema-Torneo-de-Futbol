@@ -1,5 +1,6 @@
 package sistema;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,8 +12,8 @@ public class Torneo {
 	    private String nombreTorneo;
 	    private String temporada;
 	    private List<Equipo> equipos;
-	    private Date fechaInicio;
-	    private Date fechaFin;
+	    private LocalDate fechaInicio;
+	    private LocalDate fechaFin;
 	    private List<Partido> partidos;
 
 
@@ -21,28 +22,26 @@ public class Torneo {
 
 	    
 
-		public Torneo(int idTorneo, String nombreTorneo, String temporada, List<Equipo> equipos, Date fechaInicio,
-				Date fechaFin, List<Partido> partidos) {
+		
+
+		public Torneo(int idTorneo, String nombreTorneo, String temporada, List<Equipo> equipos, LocalDate fechaInicio,
+				LocalDate fechaFin, List<Partido> partidos) {
 			super();
 			this.idTorneo = idTorneo;
 			this.nombreTorneo = nombreTorneo;
 			this.temporada = temporada;
-			this.equipos = new ArrayList<Equipo>();
+			this.equipos = equipos;
 			this.fechaInicio = fechaInicio;
 			this.fechaFin = fechaFin;
-			this.partidos = new ArrayList<Partido>();
+			this.partidos = partidos;
 		}
-
 
 
 		@Override
 		public String toString() {
 			return "Torneo [idTorneo=" + idTorneo + ", nombreTorneo=" + nombreTorneo + ", temporada=" + temporada
-					+ ", equipos=" + equipos + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", partidos="
-					+ partidos + "]";
+					+ ", equipos=" + equipos + ", partidos=" + partidos + "]";
 		}
-
-
 
 		public int getIdTorneo() {
 			return idTorneo;
@@ -83,26 +82,21 @@ public class Torneo {
 			this.equipos = equipos;
 		}
 
-
-		public Date getFechaInicio() {
+		public LocalDate getFechaInicio() {
 			return fechaInicio;
 		}
 
-
-		public void setFechaInicio(Date fechaInicio) {
+		public void setFechaInicio(LocalDate fechaInicio) {
 			this.fechaInicio = fechaInicio;
 		}
 
-
-		public Date getFechaFin() {
+		public LocalDate getFechaFin() {
 			return fechaFin;
 		}
 
-
-		public void setFechaFin(Date fechaFin) {
+		public void setFechaFin(LocalDate fechaFin) {
 			this.fechaFin = fechaFin;
 		}
-
 
 		public List<Partido> getPartidos() {
 			return partidos;
@@ -113,14 +107,37 @@ public class Torneo {
 			this.partidos = partidos;
 		}
 	    
-	    public boolean agregarEquipo(String nombreEquipo, String idEquipo, Entrenador entrenador1) {
-	    	Equipo equipo1 = new Equipo(nombreEquipo, idEquipo, entrenador1);
+	    public boolean agregarEquipo(String nombreEquipo, List<Jugador> jugadores, String idEquipo, Entrenador entrenador1) {
+	    	Equipo equipo1 = new Equipo(nombreEquipo, idEquipo, jugadores, entrenador1);
 	    	return equipos.add(equipo1);
 	    }
 	    
-	    public boolean agregarPartido(Date fechaPartido, Equipo local, Equipo visitante, String estadio, int idPartido) {
-	    	Partido partido1 = new Partido(fechaPartido, local, visitante, estadio, idPartido);
+	    public boolean agregarPartido(LocalDate fechaPartido, Equipo local, Equipo visitante, String estadio, int idPartido, int golesLocal, int golesVisitante) {
+	    	Partido partido1 = new Partido(fechaPartido, local, visitante, estadio, idPartido, golesLocal, golesVisitante);
 	    	return partidos.add(partido1);
 	    }
+	    
+	    public List<Ganador> listaGanadoresPorFecha(LocalDate fechaBuscada) {
+	    	
+	        List<Ganador> ganadores = new ArrayList<>();
+	        
+	        for (Partido partido : partidos) {
+	        	
+	        	Equipo ganador = partido.equipoGanador();
+	        
+	        	if (partido.getFechaPartido().equals(fechaBuscada)) {
+	        		
+	                if (ganador != null) {
+	                	ganadores.add(new Ganador(partido.getFechaPartido(), ganador, partido.cantGolesGanador()));
+	                }
+	        	
+	        	}
+	        }
+	        
+	        return ganadores;
+	        
+	    }
+	    
+	   
 	    
 }

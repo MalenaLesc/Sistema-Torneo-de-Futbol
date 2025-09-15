@@ -20,6 +20,7 @@ public class RegistroParticipacion {
 		this.asistencias = asistencias;
 		this.minutos = minutos;
 	}
+	
 	@Override
 	public String toString() {
 		return "RegistroParticipacion [jugador=" + jugador + ", partido=" + partido + ", goles=" + goles

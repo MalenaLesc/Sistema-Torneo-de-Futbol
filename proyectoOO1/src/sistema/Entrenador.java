@@ -1,23 +1,20 @@
 package sistema;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class Entrenador {
 	 	
 		private String apellidoEntrenador;
 	    private String nombreEntrenador;
 	    private int dniEntrenador;
-	    private Date fechaNacimientoEntrenador;
+	    private LocalDate fechaNacimientoEntrenador;
 	    private String estrategia;
 
 	
 	    public Entrenador() {}
-	    
-	    
 
-
-		public Entrenador(String apellidoEntrenador, String nombreEntrenador, int dniEntrenador,
-				Date fechaNacimientoEntrenador, String estrategia) {
+		public Entrenador(String apellidoEntrenador, String nombreEntrenador, int dniEntrenador, LocalDate fechaNacimientoEntrenador, String estrategia) {
 			super();
 			this.apellidoEntrenador = apellidoEntrenador;
 			this.nombreEntrenador = nombreEntrenador;
@@ -26,8 +23,7 @@ public class Entrenador {
 			this.estrategia = estrategia;
 		}
 
-
-
+		
 
 		@Override
 		public String toString() {
@@ -35,9 +31,6 @@ public class Entrenador {
 					+ ", dniEntrenador=" + dniEntrenador + ", fechaNacimientoEntrenador=" + fechaNacimientoEntrenador
 					+ ", estrategia=" + estrategia + "]";
 		}
-
-
-
 
 		public String getApellidoEntrenador() {
 			return apellidoEntrenador;
@@ -69,16 +62,6 @@ public class Entrenador {
 		}
 
 
-		public Date getFechaNacimientoEntrenador() {
-			return fechaNacimientoEntrenador;
-		}
-
-
-		public void setFechaNacimientoEntrenador(Date fechaNacimientoEntrenador) {
-			this.fechaNacimientoEntrenador = fechaNacimientoEntrenador;
-		}
-
-
 		public String getEstrategia() {
 			return estrategia;
 		}
@@ -87,7 +70,16 @@ public class Entrenador {
 		public void setEstrategia(String estrategia) {
 			this.estrategia = estrategia;
 		}
+
+		public LocalDate getFechaNacimientoEntrenador() {
+			return fechaNacimientoEntrenador;
+		}
+
+		public void setFechaNacimientoEntrenador(LocalDate fechaNacimientoEntrenador) {
+			this.fechaNacimientoEntrenador = fechaNacimientoEntrenador;
+		}
 	    
+		
 	    
 
 }
