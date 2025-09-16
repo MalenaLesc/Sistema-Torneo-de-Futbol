@@ -11,7 +11,7 @@ public class Equipo {
 	    private String IdEquipo;
 	    private List<Jugador> jugadores;
 	    private Entrenador entrenador;
-	    
+	    private boolean activo = true;
 		
 		
 		public Equipo(String nombreEquipo, String idEquipo, List<Jugador> jugadores, Entrenador entrenador) {
@@ -51,7 +51,15 @@ public class Equipo {
 		public void setEntrenador(Entrenador entrenador) {
 			this.entrenador = entrenador;
 		}
-	    
+	
+		public boolean isActivo() {
+		    return activo;
+		}
+
+		public void darDeBaja() {
+		    this.activo = false;
+		}
+	
 	    public boolean agregarJugador(String apellido, String nombre, int dni, LocalDate fechaNacimiento, float estatura, float peso,
 	    		String posicion, int camiseta) {
 	    	
@@ -59,5 +67,57 @@ public class Equipo {
 	    	return jugadores.add(jug1);
 	    	
 	    }
+
+		public Jugador traerJugadorPorDNI(int dniJugador){
+			Jugador jugador = null;
+			int contadorJugador = 0;
+			
+			while (jugador == null && contadorJugador < jugadores.size()) {
+				
+				if(jugadores.get(contadorJugador).getDniJugador() == dniJugador) {
+					
+					jugador = jugadores.get(contadorJugador);
+					
+				}
+				
+				contadorJugador++;
+			}
+			return jugador;
+		}
+
+		public Entrenador traerEntrenadorPorID(int dniEntrenador) {
+		    
+			if (entrenador != null && entrenador.getDniEntrenador() == dniEntrenador) {
+		    	return entrenador;
+		    }
+		    
+		    return null;
+		}
+
+	
+		public boolean darDeBajaJugador(int dniJugador) {
+		    for (Jugador jugador : jugadores) {
+		        if (jugador.getDniJugador() == dniJugador && jugador.isActivo()) {
+		        	
+		            jugador.darDeBaja();
+		            
+		            return true;
+		        }
+		    }
+		    return false;
+		}
+		
+		public boolean darDeBajaEntrenador(int dniEntrenador) {
+			
+			if (entrenador.getDniEntrenador() == dniEntrenador && entrenador.isActivo()) {
+				
+				entrenador.darDeBaja();
+				
+				return true;
+			}
+			return false;
+		}
+	
 	
 	}
+
