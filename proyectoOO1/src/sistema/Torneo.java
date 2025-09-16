@@ -2,9 +2,12 @@ package sistema;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Torneo {
 
@@ -260,5 +263,55 @@ public class Torneo {
 		    }
 			
 		}
-
+		
+		//Metodo para crear una lista de entrenadores en base a una tactica favorita
+		public List<Entrenador> traerEntrenadoresPorTactica(String tactica){
+			List<Entrenador> entrenadoresEncontrados = new ArrayList<Entrenador>();
+			for(Equipo equipo1 : equipos) {
+				Entrenador entrenador1 = equipo1.getEntrenador();
+				if(entrenador1 != null && entrenador1.getEstrategia().equalsIgnoreCase(tactica)) {
+					entrenadoresEncontrados.add(entrenador1);
+				}
+			}
+			return entrenadoresEncontrados;
+		}
+		
+		//Metodo que devuelve la cantidad total de goles anotados en el torneo por un jugador
+		public int cantidadTotalGoles(Jugador jugador) {
+			int totalGoles = 0;
+			for(Partido partido : partidos) {
+				for(RegistroParticipacion reg : partido.getRegistros()) {
+					if(reg.getJugador().equals(jugador)) {
+						totalGoles += reg.getGoles();
+					}
+				}
+			}
+			return totalGoles;
+		}
+		
+		public List<Goleador> calcularGoleadores(){
+			
+			Map<Jugador, Integer> golesPorJugador = new HashMap<>();
+			
+			for(Partido partido : partidos) {
+				for(RegistroParticipacion reg : partido.getRegistros()) {
+					
+					Jugador jugador = reg.getJugador();
+					int goles = reg.getGoles();
+					golesPorJugador.put(jugador, golesPorJugador.getOrDefault(jugador, 0) + goles);
+					
+				}
+			}
+			
+			List<Goleador> tablaGoleadores = new ArrayList<>();
+			for(Map.Entry<Jugador, Integer> entry : golesPorJugador.entrySet()) {
+				tablaGoleadores.add(new Goleador(entry.getKey(), entry.getValue()));
+			}
+			
+			tablaGoleadores.sort(Comparator.comparingInt(Goleador::getGoles).reversed());
+			
+			return tablaGoleadores;
+			
+		}
+		
 }

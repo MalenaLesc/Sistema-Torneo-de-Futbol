@@ -1,6 +1,8 @@
 package sistema;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Partido {
@@ -10,6 +12,7 @@ public class Partido {
     private Equipo visitante;
     private String estadio;
     private int idPartido;
+    private List<RegistroParticipacion> registros;
     
     private int golesLocal;
 	private int golesVisitante;
@@ -26,6 +29,7 @@ public class Partido {
 		this.idPartido = idPartido;
 		this.golesLocal = golesLocal;
 		this.golesVisitante = golesVisitante;
+		this.registros = new ArrayList<>();
 	}
 	
 	
@@ -85,6 +89,10 @@ public class Partido {
 		this.golesVisitante = golesVisitante;
 	}
 	
+	public List<RegistroParticipacion> getRegistros() {
+        return registros;
+    }
+	
 	public Equipo equipoGanador() {
 		
 		Equipo ganador = null;
@@ -111,6 +119,11 @@ public class Partido {
 	    }
 	    
 	    return goles; // si retorna 0 entonces fue empate
+	}
+	
+	public boolean agregarRegistro(Jugador jugador, int goles, int asistencias, int minutos) {
+		RegistroParticipacion reg = new RegistroParticipacion(jugador, this, goles, asistencias, minutos);
+		return registros.add(reg);
 	}
 
 }

@@ -1,6 +1,7 @@
 package sistema;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 
 public class Jugador {
@@ -97,5 +98,33 @@ public class Jugador {
 		public void darDeBaja() {
 		    this.activo = false;
 		}
-	
+
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(activo, apellidoJugador, camiseta, dniJugador, estatura, fechaNacimientoJugador,
+					nombreJugador, peso, posicion);
+		}
+
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Jugador other = (Jugador) obj;
+			return activo == other.activo && Objects.equals(apellidoJugador, other.apellidoJugador)
+					&& camiseta == other.camiseta && dniJugador == other.dniJugador
+					&& Float.floatToIntBits(estatura) == Float.floatToIntBits(other.estatura)
+					&& Objects.equals(fechaNacimientoJugador, other.fechaNacimientoJugador)
+					&& Objects.equals(nombreJugador, other.nombreJugador)
+					&& Float.floatToIntBits(peso) == Float.floatToIntBits(other.peso)
+					&& Objects.equals(posicion, other.posicion);
+		}
+		
+		
+		
 	}

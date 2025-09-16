@@ -8,6 +8,7 @@ import java.util.List;
 import sistema.Entrenador;
 import sistema.Equipo;
 import sistema.Ganador;
+import sistema.Goleador;
 import sistema.Jugador;
 import sistema.Partido;
 import sistema.Torneo;
@@ -71,6 +72,22 @@ public class TestSistema {
         System.out.println("\n--- Tabla de posiciones ---");
         torneo.mostrarTablaPosiciones(torneo.generarTablaPosiciones());;
         
+        //CU 5: Generar lista de entrenadores filtrando por una estrategia en particular
+        System.out.println(torneo.traerEntrenadoresPorTactica("defensiva"));
+        
+        //Agregamos registros de jugadores
+        partido1.agregarRegistro(j1, 1, 0, 90);
+        partido1.agregarRegistro(j4, 1, 0, 90);
+        partido2.agregarRegistro(j1, 2, 1, 90);
+        partido2.agregarRegistro(j2, 1, 0, 85);
+        
+        //CU 12: Calcular cantidad total de goles de un jugador en el torneo
+        System.out.println("Goles de " + j1.getNombreJugador() + ": " + torneo.cantidadTotalGoles(j1));
+        
+        //CU 14: Generar Lista ordenada de forma descendente por la cantidad de goles de cada jugador
+        System.out.println("----Tabla de goleadores----");
+        List<Goleador> tablaGoleadores = torneo.calcularGoleadores();
+        System.out.println(tablaGoleadores);
         
 	    }
 	
