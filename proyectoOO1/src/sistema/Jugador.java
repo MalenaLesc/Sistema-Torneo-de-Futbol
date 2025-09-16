@@ -13,8 +13,8 @@ public class Jugador {
 	    private float peso;
 	    private String posicion;
 	    private int camiseta;
+	    private boolean activo = true;
 	
-		
 		
 	    public Jugador() {}
 	   
@@ -89,6 +89,13 @@ public class Jugador {
 		public void setCamiseta(int camiseta) {
 			this.camiseta = camiseta;
 		}
-		
+
+		public boolean isActivo() {
+		    return activo;
+		}
+
+		public void darDeBaja() {
+		    this.activo = false;
+		}
 	
 	}
