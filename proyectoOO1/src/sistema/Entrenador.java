@@ -10,6 +10,7 @@ public class Entrenador {
 	    private int dniEntrenador;
 	    private LocalDate fechaNacimientoEntrenador;
 	    private String estrategia;
+		private boolean activo = true;
 
 	
 	    public Entrenador() {}
@@ -78,8 +79,14 @@ public class Entrenador {
 		public void setFechaNacimientoEntrenador(LocalDate fechaNacimientoEntrenador) {
 			this.fechaNacimientoEntrenador = fechaNacimientoEntrenador;
 		}
-	    
+
+		public boolean isActivo() {
+		    return activo;
+		}
+
+		public void darDeBaja() {
+		    this.activo = false;
+		}
 		
 	    
-
 }
