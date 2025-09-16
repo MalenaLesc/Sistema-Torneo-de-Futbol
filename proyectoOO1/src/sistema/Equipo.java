@@ -11,22 +11,27 @@ public class Equipo {
 	    private String IdEquipo;
 	    private List<Jugador> jugadores;
 	    private Entrenador entrenador;
+	    private LocalDate fechaFundacion;
 	    private boolean activo = true;
 		
 		
-		public Equipo(String nombreEquipo, String idEquipo, List<Jugador> jugadores, Entrenador entrenador) {
+		public Equipo(String nombreEquipo, String idEquipo, List<Jugador> jugadores, Entrenador entrenador, LocalDate fechaFundacion) {
 			super();
 			this.nombreEquipo = nombreEquipo;
 			IdEquipo = idEquipo;
 			this.jugadores = jugadores;
 			this.entrenador = entrenador;
+			this.fechaFundacion = fechaFundacion;
 		}
+		
 		
 		@Override
 		public String toString() {
 			return "Equipo [nombreEquipo=" + nombreEquipo + ", IdEquipo=" + IdEquipo + ", jugadores=" + jugadores
-					+ ", entrenador=" + entrenador + "]";
+					+ ", entrenador=" + entrenador + ", fechaFundacion=" + fechaFundacion + ", activo=" + activo + "]";
 		}
+
+
 		public String getNombreEquipo() {
 			return nombreEquipo;
 		}
@@ -52,6 +57,16 @@ public class Equipo {
 			this.entrenador = entrenador;
 		}
 	
+		public LocalDate getFechaFundacion() {
+			return fechaFundacion;
+		}
+
+
+		public void setFechaFundacion(LocalDate fechaFundacion) {
+			this.fechaFundacion = fechaFundacion;
+		}
+
+
 		public boolean isActivo() {
 		    return activo;
 		}
@@ -117,7 +132,25 @@ public class Equipo {
 			}
 			return false;
 		}
-	
+		
+		public float calcularEstaturaPromedio() {
+			
+			float resultado = 0;
+			
+			if (jugadores.size() == 0)
+				return resultado;
+			
+			for (Jugador jugador: jugadores) {
+				
+				resultado += jugador.getEstatura();
+				
+			}
+			
+			resultado = resultado/jugadores.size();
+			
+			return resultado;
+			
+		}
 	
 	}
 

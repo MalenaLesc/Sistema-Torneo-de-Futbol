@@ -2,6 +2,7 @@ package sistema;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -107,8 +108,8 @@ public class Torneo {
 			this.partidos = partidos;
 		}
 	    
-	    public boolean agregarEquipo(String nombreEquipo, List<Jugador> jugadores, String idEquipo, Entrenador entrenador1) {
-	    	Equipo equipo1 = new Equipo(nombreEquipo, idEquipo, jugadores, entrenador1);
+	    public boolean agregarEquipo(String nombreEquipo, List<Jugador> jugadores, String idEquipo, Entrenador entrenador1, LocalDate fechaFundacion) {
+	    	Equipo equipo1 = new Equipo(nombreEquipo, idEquipo, jugadores, entrenador1, fechaFundacion);
 	    	return equipos.add(equipo1);
 	    }
 	    
@@ -179,5 +180,85 @@ public class Torneo {
 		    return false;
 		}
 	    
+		public List<Equipo> traerEquiposPorFechaDeFundacion(LocalDate fecha){
+			
+			List<Equipo> equiposPorFecha = new ArrayList<>();
+			
+			for (Equipo equipo: equipos) {
+				
+				if (equipo.getFechaFundacion().isBefore(fecha)) {
+					
+					equiposPorFecha.add(equipo);					
+				}
+				
+			}
+			
+			return equiposPorFecha;
+			
+		}
+		
+		public int calcularPuntosPorEquipo (Equipo equipo) {
+			
+			int puntos = 0;
+			
+			for (Partido p: partidos) {
+				
+				if (equipo.equals(p.getLocal()))
+					if (p.getGolesLocal() > p.getGolesVisitante())
+						puntos += 3;
+					else if (p.getGolesLocal() == p.getGolesVisitante())
+						puntos += 1;
+				
+				if (equipo.equals(p.getVisitante()))
+					if (p.getGolesVisitante() > p.getGolesLocal())
+						puntos += 3;
+					else if (p.getGolesVisitante() == p.getGolesLocal())
+						puntos += 1;
+				
+			}
+			
+			return puntos;
+			
+		}
+		
+		private class Posicion {
+			
+			Equipo equipo;
+			int puntaje;
+			
+			public Posicion(Equipo equipo, int puntaje) {
+				super();
+				this.equipo = equipo;
+				this.puntaje = puntaje;
+			}
+			
+		}
+		
+		public List<Posicion> generarTablaPosiciones(){
+			
+			List<Posicion> tabla = new ArrayList<>();
+			
+			for (Equipo e: equipos) {
+				Posicion posicion = new Posicion(e, calcularPuntosPorEquipo(e));
+				tabla.add(posicion);
+			}
+			
+			tabla.sort(Comparator.comparingInt((Posicion p) -> p.puntaje).reversed());
+			
+			return tabla;
+			
+		}
+		
+		// Agrego una forma "amigable" para mostrar la tabla de posiciones:
+		public void mostrarTablaPosiciones(List<Posicion> tabla) {
+			
+			System.out.printf("%-20s %s%n", "Equipo", "Puntos");
+		    System.out.println("-------------------- ------");
+
+		    for (Posicion p : tabla) {
+		        System.out.printf("%-20s %5d%n", p.equipo.getNombreEquipo(), p.puntaje);
+		    }
+			
+		}
 
 }

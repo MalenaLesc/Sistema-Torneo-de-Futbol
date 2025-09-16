@@ -33,8 +33,8 @@ public class TestSistema {
         Jugador j6 = new Jugador("Ramírez", "Sergio", 88888888, LocalDate.of(1991, 9, 30), 1.88f, 80, "Defensa", 4);
 
         // Crear equipos
-        Equipo equipo1 = new Equipo("Tiburones", "E001", Arrays.asList(j1, j2, j3), entrenador1);
-        Equipo equipo2 = new Equipo("Leones", "E002", Arrays.asList(j4, j5, j6), entrenador2);
+        Equipo equipo1 = new Equipo("Tiburones", "E001", Arrays.asList(j1, j2, j3), entrenador1, LocalDate.of(1970, 02, 26));
+        Equipo equipo2 = new Equipo("Leones", "E002", Arrays.asList(j4, j5, j6), entrenador2, LocalDate.of(1999, 01,30));
 
         // Crear partidos
 
@@ -60,6 +60,18 @@ public class TestSistema {
 	                System.out.println(g);
 	            }
 	        }
+        
+        //CU 7: mostrar equipos fundados antes de una determinada fecha
+        System.out.println("\nEquipos fundados antes de 1980:\n" + torneo.traerEquiposPorFechaDeFundacion(LocalDate.of(1980, 01, 01)));;
+        
+        //CU 8: calcular altura promedio por equipo
+        System.out.println("\nAltura promedio de "+ equipo1.getNombreEquipo()+ ": "+ equipo1.calcularEstaturaPromedio());
+        
+        //CU 10 y 11: generar la tabla de posiciones según los puntos de cada equipo
+        System.out.println("\n--- Tabla de posiciones ---");
+        torneo.mostrarTablaPosiciones(torneo.generarTablaPosiciones());;
+        
+        
 	    }
 	
 }
