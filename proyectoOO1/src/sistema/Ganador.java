@@ -44,5 +44,6 @@ public class Ganador {
 	public void setGoles(int goles) {
 		this.goles = goles;
 	}
+	
 
 }
