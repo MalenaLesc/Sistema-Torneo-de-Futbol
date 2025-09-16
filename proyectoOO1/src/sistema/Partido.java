@@ -29,7 +29,6 @@ public class Partido {
 	}
 	
 	
-	
 	@Override
 	public String toString() {
 		return "Partido [fechaPartido=" + fechaPartido + ", local=" + local + ", visitante=" + visitante + ", estadio="
@@ -115,3 +114,4 @@ public class Partido {
 	}
 
 }
+
