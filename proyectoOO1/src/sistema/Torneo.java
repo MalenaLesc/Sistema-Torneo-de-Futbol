@@ -137,7 +137,47 @@ public class Torneo {
 	        return ganadores;
 	        
 	    }
+		public List<Equipo> traerEquipoPorID(String IdEquipo){
+			List<Equipo> filtrarEquipo = new ArrayList<Equipo>(); 
+			
+			for (Equipo equipo : equipos) {
+				
+				if (equipo.getNombreEquipo().indexOf(IdEquipo) >= 0) {
+					
+					filtrarEquipo.add(equipo);
+				}
+			}
+			
+			return filtrarEquipo;
+		}
+		
+		public Partido traerPartidosPorID(int idPartido) {
+		    Partido partido = null;
+		    int contadorPartidos = 0;
+
+		    while (partido == null && contadorPartidos < partidos.size()) {
+		    	
+		        if (partidos.get(contadorPartidos).getIdPartido() == idPartido) {
+		        	
+		            partido = partidos.get(contadorPartidos);
+		            
+		        }
+		        
+		        contadorPartidos++;
+		    }
+
+		    return partido;
+		}
+		
+		public boolean darDeBajaEquipo(String idEquipo) {
+		    for (Equipo equipo : equipos) {
+		        if (equipo.getIdEquipo().equals(idEquipo) && equipo.isActivo()) {
+		            equipo.darDeBaja();
+		            return true;
+		        }
+		    }
+		    return false;
+		}
 	    
-	   
-	    
+
 }
