@@ -151,6 +151,38 @@ public class Equipo {
 			return resultado;
 			
 		}
+
 	
+		public List<Jugador> buscarJugadoresPorFecha(LocalDate desde, LocalDate hasta) {
+		    List<Jugador> resultado = new ArrayList<>();
+		    
+		    for (Jugador jugador : jugadores) {
+		    	
+		        LocalDate fechaNacimiento = jugador.getFechaNacimientoJugador();
+		        if (fechaNacimiento != null && 
+		            (fechaNacimiento.isAfter(desde) || fechaNacimiento.isEqual(desde)) && 
+		            (fechaNacimiento.isBefore(hasta) || fechaNacimiento.isEqual(hasta))) {
+		            
+		            resultado.add(jugador);
+		        }
+		    }
+		    
+		    return resultado;
+		}
+		
+		public float calcularAlturaPromedio() {
+			
+		    if (jugadores == null || jugadores.isEmpty()) {
+		        return 0; 
+		    }
+		    
+		    float sumarAltura = 0;
+		    for (Jugador j : jugadores) {
+		    	sumarAltura += j.getEstatura();
+		    }
+		    return sumarAltura / jugadores.size();
+		}
+		
 	}
+
 
