@@ -82,7 +82,7 @@ public class TestSistema {
         
         //CU 14: Generar Lista ordenada de forma descendente por la cantidad de goles de cada jugador
         System.out.println("\n----Tabla de goleadores----");
-        List<Goleador> tablaGoleadores = torneo.calcularGoleadores();
+        List<Goleador> tablaGoleadores = torneo.tablaGoleadores();
         System.out.println(tablaGoleadores);
         
         //CU 15: Generación de tabla de asistidores
@@ -109,7 +109,7 @@ public class TestSistema {
     	
 	    }
 	
-	    }
+	    
 	
 }
 

@@ -21,6 +21,14 @@ public class Goleador {
 	public String toString() {
 		return "Goleador [jugador=" + jugador + ", goles=" + goles + "]";
 	}
+
+	public void setJugador(Jugador jugador) {
+		this.jugador = jugador;
+	}
+
+	public void setGoles(int goles) {
+		this.goles = goles;
+	}
     
     
 }

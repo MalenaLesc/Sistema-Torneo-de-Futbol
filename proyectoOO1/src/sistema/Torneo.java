@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Torneo {
 
@@ -306,28 +304,44 @@ public class Torneo {
 			return totalGoles;
 		}
 		
-		public List<Goleador> calcularGoleadores(){
-			
-			Map<Jugador, Integer> golesPorJugador = new HashMap<>();
+		//CU 14: generar una tabla ordenada de forma descendente con los goleadores del torneo
+		
+		public List<Goleador> tablaGoleadores(){
+			List<Goleador> goleadores = new ArrayList<>();
 			
 			for(Partido partido : partidos) {
-				for(RegistroParticipacion reg : partido.getRegistros()) {
+				for(RegistroParticipacion registro : partido.getRegistros()) {
 					
-					Jugador jugador = reg.getJugador();
-					int goles = reg.getGoles();
-					golesPorJugador.put(jugador, golesPorJugador.getOrDefault(jugador, 0) + goles);
+					Jugador jugador = registro.getJugador();
+					int goles = registro.getGoles();
+					
+					Goleador goleador = null;
+					int i = 0;
+					
+					while(i < goleadores.size() && goleador == null) {
+						
+						Goleador a = goleadores.get(i);
+						
+						if(a.getJugador().equals(jugador)) {
+							goleador = a;
+						}
+						
+						i++;
+						
+					}
+					
+					if(goleador != null) {
+						goleador.setGoles(goleador.getGoles() + goles);
+					}else {
+						goleadores.add(new Goleador(jugador, goles));
+					}
 					
 				}
 			}
 			
-			List<Goleador> tablaGoleadores = new ArrayList<>();
-			for(Map.Entry<Jugador, Integer> entry : golesPorJugador.entrySet()) {
-				tablaGoleadores.add(new Goleador(entry.getKey(), entry.getValue()));
-			}
+			goleadores.sort(Comparator.comparingInt(Goleador::getGoles).reversed());
 			
-			tablaGoleadores.sort(Comparator.comparingInt(Goleador::getGoles).reversed());
-			
-			return tablaGoleadores;
+			return goleadores;
 			
 		}
 		
