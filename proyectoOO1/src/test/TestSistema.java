@@ -92,9 +92,26 @@ public class TestSistema {
             System.out.println(a);
         }
         
+        // CU 6: Busqueda por fecha de nacimiento
+        LocalDate desde = LocalDate.of(1994, 1, 1);
+        LocalDate hasta = LocalDate.of(1996, 12, 31);
+
+        List<Jugador> jugadoresFiltrados = equipo1.buscarJugadoresPorFecha(desde, hasta);
         
+        System.out.println("Jugadores de " + equipo1.getNombreEquipo() + " nacidos entre " + desde + " y " + hasta + ":");
+        for (Jugador j : jugadoresFiltrados) {
+            System.out.println(j.getNombreJugador() + " " + j.getApellidoJugador() + " - Nacido el " + j.getFechaNacimientoJugador());
+        }
+
+    	// CU 9: equipo con mayor altura promedio
+    	Equipo mejor = torneo.equipoConMayorAlturaPromedio();
+    	System.out.println("El equipo con mayor altura promedio es: " + mejor.getNombreEquipo() + " con promedio de " + mejor.calcularAlturaPromedio());
+    	
+	    }
+	
 	    }
 	
 }
+
 
 
