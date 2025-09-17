@@ -400,4 +400,25 @@ public class Torneo {
 		}
 
 	
+	    public Equipo equipoConMayorAlturaPromedio() {
+	    	
+	    	if (equipos == null || equipos.isEmpty()) {
+	            return null; 
+	        }
+
+	        Equipo mejorEquipoAltura = equipos.get(0);
+	        float maxPromedio = mejorEquipoAltura.calcularAlturaPromedio();
+
+	        for (Equipo equipo : equipos) {
+	            float promedio = equipo.calcularAlturaPromedio();
+	            if (promedio > maxPromedio) {
+	                maxPromedio = promedio;
+	                mejorEquipoAltura = equipo;
+	            }
+	        }
+	        return mejorEquipoAltura;
+	    }
+	
+
 }
+
