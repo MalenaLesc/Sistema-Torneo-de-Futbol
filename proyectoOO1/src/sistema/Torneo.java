@@ -121,6 +121,11 @@ public class Torneo {
 	    	return partidos.add(partido1);
 	    }
 	    
+	    
+	    //CU 4: Traer para un torneo y un número de fecha, la lista de los equipos ganadores
+	    //utilizando una clase (Ganador, no se persiste es solo para generar reporte) con
+	    //fecha, el equipo ganador, cantidad de goles
+	    
 	    public List<Ganador> listaGanadoresPorFecha(LocalDate fechaBuscada) {
 	    	
 	        List<Ganador> ganadores = new ArrayList<>();
@@ -137,10 +142,22 @@ public class Torneo {
 	        	
 	        	}
 	        }
-	        
-	        return ganadores;
-	        
+	        	
+        	System.out.println("=== Ganadores del " + fechaBuscada + " ===\n");
+        	
+            if (ganadores.isEmpty()) {
+                System.out.println("No hubo ganadores en esa fecha (empates o sin partidos)\n");
+                
+            } else {
+                for (Ganador g : ganadores) {
+                    System.out.println("Equipo: " + g.getEquipoGanador().getNombreEquipo() + ", Goles: " + g.getGoles());
+                }
+            }
+        
+        
+	        return ganadores; 
 	    }
+	    
 		public List<Equipo> traerEquipoPorID(String IdEquipo){
 			List<Equipo> filtrarEquipo = new ArrayList<Equipo>(); 
 			
@@ -314,4 +331,73 @@ public class Torneo {
 			
 		}
 		
+		//CU 13: Cálculo de asistencias por jugador: Escribir un método que, dado un objeto Jugador, 
+		//devuelva el total de asistencias que ha logrado en el torneo.
+
+		public int totalAsistenciasTorneo (Jugador jugador) {
+			
+		    int totalAsistencias = 0;
+		    
+		    for (Partido partido : partidos) {
+		    	
+		        for (RegistroParticipacion registro : partido.getRegistros()) {
+		        	
+		            if (registro.getJugador().equals(jugador)) {
+		                totalAsistencias += registro.getAsistencias();
+		            }
+		        }
+		    }
+		    
+		    return totalAsistencias;
+		}
+
+		//CU 15: Generación de tabla de asistidores: Implementar un método que retorne una lista de
+		//(Asistencia, no se persiste es solo para generar reporte) con el jugador y sus asistencias, 
+		//ordenada de mayor a menor (utilizando ordenamiento de listas nativo o desarrollando el algoritmo de algún método de ordenamiento).
+	
+		public List<Asistencia> tablaAsistidores() {
+		    List<Asistencia> tablaAsistencias = new ArrayList<>();
+	
+		    for (Partido partido : partidos) {
+		    	
+		        for (RegistroParticipacion registro : partido.getRegistros()) {
+		            
+		            Jugador jugador = registro.getJugador();
+		            int asistencias = registro.getAsistencias();
+	
+		            
+		            
+		            Asistencia asistenciaEncontrada = null;
+		            int i = 0;
+		            //Busco si el jugador ya existe en mi tabla
+		            while (i < tablaAsistencias.size() && asistenciaEncontrada == null) {
+		            	
+		                Asistencia a = tablaAsistencias.get(i);
+		                
+		                if (a.getJugador().equals(jugador)) {
+		                    asistenciaEncontrada = a;
+		                }
+		                
+		                i++;
+		            }
+	
+		            if (asistenciaEncontrada != null) {
+		            	
+		                //Si el jugador ya estaba, sumo el numero de asistencias al que ya estaba guardado
+		                asistenciaEncontrada.setAsistencias(asistenciaEncontrada.getAsistencias() + asistencias);
+		                
+		            } else {
+		                // si no esta, lo agrego
+		                tablaAsistencias.add(new Asistencia(jugador, asistencias));
+		            }
+		        }
+		    }
+	
+		    // ordena de manera descendente
+		    tablaAsistencias.sort(Comparator.comparingInt(Asistencia::getAsistencias).reversed());
+	
+		    return tablaAsistencias;
+		}
+
+	
 }

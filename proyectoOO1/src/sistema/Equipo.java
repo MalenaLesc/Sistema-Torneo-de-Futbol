@@ -27,8 +27,8 @@ public class Equipo {
 		
 		@Override
 		public String toString() {
-			return "Equipo [nombreEquipo=" + nombreEquipo + ", IdEquipo=" + IdEquipo + ", jugadores=" + jugadores
-					+ ", entrenador=" + entrenador + ", fechaFundacion=" + fechaFundacion + ", activo=" + activo + "]";
+			return "Equipo [nombreEquipo=" + nombreEquipo + ", IdEquipo=" + IdEquipo + ", \njugadores=" + jugadores
+					+ ",\nentrenador=" + entrenador + ", fechaFundacion=" + fechaFundacion + ", activo=" + activo + "]";
 		}
 
 

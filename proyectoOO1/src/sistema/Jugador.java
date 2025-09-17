@@ -36,7 +36,7 @@ public class Jugador {
 	
 		@Override
 		public String toString() {
-			return "Jugador [apellidoJugador=" + apellidoJugador + ", nombreJugador=" + nombreJugador + ", dniJugador="
+			return "\nJugador [apellidoJugador=" + apellidoJugador + ", nombreJugador=" + nombreJugador + ", dniJugador="
 					+ dniJugador + ", fechaNacimientoJugador=" + fechaNacimientoJugador + ", estatura=" + estatura
 					+ ", peso=" + peso + ", posicion=" + posicion + ", camiseta=" + camiseta + "]";
 		}

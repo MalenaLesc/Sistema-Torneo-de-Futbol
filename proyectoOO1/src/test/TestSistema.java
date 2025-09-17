@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import sistema.Asistencia;
 import sistema.Entrenador;
 import sistema.Equipo;
 import sistema.Ganador;
@@ -38,7 +39,6 @@ public class TestSistema {
         Equipo equipo2 = new Equipo("Leones", "E002", Arrays.asList(j4, j5, j6), entrenador2, LocalDate.of(1999, 01,30));
 
         // Crear partidos
-
         Partido partido1 = new Partido(LocalDate.of(2025, 3, 15), equipo1, equipo2, "Estadio Central", 2, 1, 1);
         Partido partido2 = new Partido(LocalDate.of(2025, 3, 22), equipo2, equipo1, "Estadio Norte", 0, 3, 9);
         Partido partido3 = new Partido(LocalDate.of(2025, 3, 22), equipo1, equipo2, "Estadio Sur", 1, 1, 2); // empate
@@ -50,17 +50,8 @@ public class TestSistema {
 
         // CU 4: ganadores por fecha
         LocalDate fechaConsulta = LocalDate.of(2025, 3, 22);
-        System.out.println("=== Ganadores del " + fechaConsulta + " ===");
+        torneo.listaGanadoresPorFecha(fechaConsulta);
 
-        List<Ganador> ganadores = torneo.listaGanadoresPorFecha(fechaConsulta);
-
-        if (ganadores.isEmpty()) {
-            System.out.println("No hubo ganadores en esa fecha (empates o sin partidos).");
-	        } else {
-	            for (Ganador g : ganadores) {
-	                System.out.println(g);
-	            }
-	        }
         
         //CU 7: mostrar equipos fundados antes de una determinada fecha
         System.out.println("\nEquipos fundados antes de 1980:\n" + torneo.traerEquiposPorFechaDeFundacion(LocalDate.of(1980, 01, 01)));;
@@ -76,7 +67,7 @@ public class TestSistema {
         System.out.println(torneo.traerEntrenadoresPorTactica("defensiva"));
         
         //Agregamos registros de jugadores
-        partido1.agregarRegistro(j1, 1, 0, 90);
+        partido1.agregarRegistro(j1, 1, 7, 90);
         partido1.agregarRegistro(j4, 1, 0, 90);
         partido2.agregarRegistro(j1, 2, 1, 90);
         partido2.agregarRegistro(j2, 1, 0, 85);
@@ -84,10 +75,23 @@ public class TestSistema {
         //CU 12: Calcular cantidad total de goles de un jugador en el torneo
         System.out.println("Goles de " + j1.getNombreJugador() + ": " + torneo.cantidadTotalGoles(j1));
         
+        //CU 13: Cálculo de asistencias por jugador
+        System.out.println("\n=== Total de asistencias por jugador ===");
+        System.out.println(j1.getNombreJugador() + ": " + torneo.totalAsistenciasTorneo(j1));
+        System.out.println(j2.getNombreJugador() + ": " + torneo.totalAsistenciasTorneo(j2));
+        
         //CU 14: Generar Lista ordenada de forma descendente por la cantidad de goles de cada jugador
-        System.out.println("----Tabla de goleadores----");
+        System.out.println("\n----Tabla de goleadores----");
         List<Goleador> tablaGoleadores = torneo.calcularGoleadores();
         System.out.println(tablaGoleadores);
+        
+        //CU 15: Generación de tabla de asistidores
+        System.out.println("\n=== Tabla de asistidores ===");
+        List<Asistencia> tablaAsistidores = torneo.tablaAsistidores();
+        for (Asistencia a : tablaAsistidores) {
+            System.out.println(a);
+        }
+        
         
 	    }
 	
