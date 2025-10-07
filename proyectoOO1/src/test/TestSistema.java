@@ -73,12 +73,12 @@ public class TestSistema {
         partido2.agregarRegistro(j2, 1, 0, 85);
         
         //CU 12: Calcular cantidad total de goles de un jugador en el torneo
-        System.out.println("Goles de " + j1.getNombreJugador() + ": " + torneo.cantidadTotalGoles(j1));
+        System.out.println("Goles de " + j1.getNombre() + ": " + torneo.cantidadTotalGoles(j1));
         
         //CU 13: Cálculo de asistencias por jugador
         System.out.println("\n=== Total de asistencias por jugador ===");
-        System.out.println(j1.getNombreJugador() + ": " + torneo.totalAsistenciasTorneo(j1));
-        System.out.println(j2.getNombreJugador() + ": " + torneo.totalAsistenciasTorneo(j2));
+        System.out.println(j1.getNombre() + ": " + torneo.totalAsistenciasTorneo(j1));
+        System.out.println(j2.getNombre() + ": " + torneo.totalAsistenciasTorneo(j2));
         
         //CU 14: Generar Lista ordenada de forma descendente por la cantidad de goles de cada jugador
         System.out.println("\n----Tabla de goleadores----");
@@ -100,7 +100,7 @@ public class TestSistema {
         
         System.out.println("Jugadores de " + equipo1.getNombreEquipo() + " nacidos entre " + desde + " y " + hasta + ":");
         for (Jugador j : jugadoresFiltrados) {
-            System.out.println(j.getNombreJugador() + " " + j.getApellidoJugador() + " - Nacido el " + j.getFechaNacimientoJugador());
+            System.out.println(j.getNombre() + " " + j.getApellido() + " - Nacido el " + j.getFechaNacimiento());
         }
 
     	// CU 9: equipo con mayor altura promedio

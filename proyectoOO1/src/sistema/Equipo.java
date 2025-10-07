@@ -89,7 +89,7 @@ public class Equipo {
 			
 			while (jugador == null && contadorJugador < jugadores.size()) {
 				
-				if(jugadores.get(contadorJugador).getDniJugador() == dniJugador) {
+				if(jugadores.get(contadorJugador).getDni() == dniJugador) {
 					
 					jugador = jugadores.get(contadorJugador);
 					
@@ -102,7 +102,7 @@ public class Equipo {
 
 		public Entrenador traerEntrenadorPorID(int dniEntrenador) {
 		    
-			if (entrenador != null && entrenador.getDniEntrenador() == dniEntrenador) {
+			if (entrenador != null && entrenador.getDni() == dniEntrenador) {
 		    	return entrenador;
 		    }
 		    
@@ -112,7 +112,7 @@ public class Equipo {
 	
 		public boolean darDeBajaJugador(int dniJugador) {
 		    for (Jugador jugador : jugadores) {
-		        if (jugador.getDniJugador() == dniJugador && jugador.isActivo()) {
+		        if (jugador.getDni() == dniJugador && jugador.isActivo()) {
 		        	
 		            jugador.darDeBaja();
 		            
@@ -124,7 +124,7 @@ public class Equipo {
 		
 		public boolean darDeBajaEntrenador(int dniEntrenador) {
 			
-			if (entrenador.getDniEntrenador() == dniEntrenador && entrenador.isActivo()) {
+			if (entrenador.getDni() == dniEntrenador && entrenador.isActivo()) {
 				
 				entrenador.darDeBaja();
 				
@@ -158,7 +158,7 @@ public class Equipo {
 		    
 		    for (Jugador jugador : jugadores) {
 		    	
-		        LocalDate fechaNacimiento = jugador.getFechaNacimientoJugador();
+		        LocalDate fechaNacimiento = jugador.getFechaNacimiento();
 		        if (fechaNacimiento != null && 
 		            (fechaNacimiento.isAfter(desde) || fechaNacimiento.isEqual(desde)) && 
 		            (fechaNacimiento.isBefore(hasta) || fechaNacimiento.isEqual(hasta))) {

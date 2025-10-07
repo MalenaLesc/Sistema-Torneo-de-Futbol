@@ -4,29 +4,18 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 
-public class Jugador {
+public class Jugador extends Persona{
 	
-		private String apellidoJugador;
-		private String nombreJugador;
-	    private int dniJugador;
-	    private LocalDate fechaNacimientoJugador;
 	    private float estatura;
 	    private float peso;
 	    private String posicion;
 	    private int camiseta;
 	    private boolean activo = true;
-	
-		
-	    public Jugador() {}
 	   
 	
 		public Jugador(String apellidoJugador, String nombreJugador, int dniJugador, LocalDate fechaNacimientoJugador,
 				float estatura, float peso, String posicion, int camiseta) {
-			super();
-			this.apellidoJugador = apellidoJugador;
-			this.nombreJugador = nombreJugador;
-			this.dniJugador = dniJugador;
-			this.fechaNacimientoJugador = fechaNacimientoJugador;
+			super(nombreJugador, apellidoJugador, dniJugador, fechaNacimientoJugador);
 			this.estatura = estatura;
 			this.peso = peso;
 			this.posicion = posicion;
@@ -34,38 +23,16 @@ public class Jugador {
 		}
 	
 	
+		
+	
+	
 		@Override
 		public String toString() {
-			return "\nJugador [apellidoJugador=" + apellidoJugador + ", nombreJugador=" + nombreJugador + ", dniJugador="
-					+ dniJugador + ", fechaNacimientoJugador=" + fechaNacimientoJugador + ", estatura=" + estatura
-					+ ", peso=" + peso + ", posicion=" + posicion + ", camiseta=" + camiseta + "]";
+			return super.toString() + "Jugador [estatura=" + estatura + ", peso=" + peso + ", posicion=" + posicion + ", camiseta="
+					+ camiseta + ", activo=" + activo + "]";
 		}
-	
-	
-		public String getApellidoJugador() {
-			return apellidoJugador;
-		}
-		public void setApellidoJugador(String apellidoJugador) {
-			this.apellidoJugador = apellidoJugador;
-		}
-		public String getNombreJugador() {
-			return nombreJugador;
-		}
-		public void setNombreJugador(String nombreJugador) {
-			this.nombreJugador = nombreJugador;
-		}
-		public int getDniJugador() {
-			return dniJugador;
-		}
-		public void setDniJugador(int dniJugador) {
-			this.dniJugador = dniJugador;
-		}	
-		public LocalDate getFechaNacimientoJugador() {
-			return fechaNacimientoJugador;
-		}
-		public void setFechaNacimientoJugador(LocalDate fechaNacimientoJugador) {
-			this.fechaNacimientoJugador = fechaNacimientoJugador;
-		}
+
+
 		public float getEstatura() {
 			return estatura;
 		}
@@ -100,30 +67,17 @@ public class Jugador {
 		}
 
 
+
+
+
 		@Override
 		public int hashCode() {
-			return Objects.hash(activo, apellidoJugador, camiseta, dniJugador, estatura, fechaNacimientoJugador,
-					nombreJugador, peso, posicion);
+			return Objects.hash(activo, camiseta, estatura, peso, posicion);
 		}
 
+		
 
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Jugador other = (Jugador) obj;
-			return activo == other.activo && Objects.equals(apellidoJugador, other.apellidoJugador)
-					&& camiseta == other.camiseta && dniJugador == other.dniJugador
-					&& Float.floatToIntBits(estatura) == Float.floatToIntBits(other.estatura)
-					&& Objects.equals(fechaNacimientoJugador, other.fechaNacimientoJugador)
-					&& Objects.equals(nombreJugador, other.nombreJugador)
-					&& Float.floatToIntBits(peso) == Float.floatToIntBits(other.peso)
-					&& Objects.equals(posicion, other.posicion);
-		}
+
 		
 		
 		
