@@ -8,6 +8,7 @@ public abstract class Persona {
 	protected String apellido;
 	protected long dni;
 	protected LocalDate fechaNacimiento;
+	
 	public String getNombre() {
 		return nombre;
 	}

@@ -370,46 +370,44 @@ public class Torneo {
 		//ordenada de mayor a menor (utilizando ordenamiento de listas nativo o desarrollando el algoritmo de algún método de ordenamiento).
 	
 		public List<Asistencia> tablaAsistidores() {
-		    List<Asistencia> tablaAsistencias = new ArrayList<>();
-	
+			
+			List<Asistencia> tablaAsistencias = new ArrayList<>();
+		    List<Jugador> jugadores = new ArrayList<>();
+
+
 		    for (Partido partido : partidos) {
 		    	
 		        for (RegistroParticipacion registro : partido.getRegistros()) {
-		            
 		            Jugador jugador = registro.getJugador();
-		            int asistencias = registro.getAsistencias();
-	
-		            
-		            
-		            Asistencia asistenciaEncontrada = null;
+
+		            // Busco si ya esta el jugador en la lista
+		            boolean encontrado = false;
 		            int i = 0;
-		            //Busco si el jugador ya existe en mi tabla
-		            while (i < tablaAsistencias.size() && asistenciaEncontrada == null) {
+		            while (!encontrado && i < jugadores.size()) {
 		            	
-		                Asistencia a = tablaAsistencias.get(i);
-		                
-		                if (a.getJugador().equals(jugador)) {
-		                    asistenciaEncontrada = a;
+		                if (jugadores.get(i).equals(jugador)) {
+		                    encontrado = true;
 		                }
-		                
 		                i++;
 		            }
-	
-		            if (asistenciaEncontrada != null) {
-		            	
-		                //Si el jugador ya estaba, sumo el numero de asistencias al que ya estaba guardado
-		                asistenciaEncontrada.setAsistencias(asistenciaEncontrada.getAsistencias() + asistencias);
-		                
-		            } else {
-		                // si no esta, lo agrego
-		                tablaAsistencias.add(new Asistencia(jugador, asistencias));
+
+		            // Si no estaba, lo agrego
+		            if (!encontrado) {
+		                jugadores.add(jugador);
 		            }
 		        }
 		    }
+
 	
-		    // ordena de manera descendente
+		    for (Jugador jugador : jugadores) {
+		        int totalAsistencias = totalAsistenciasTorneo(jugador);
+		        tablaAsistencias.add(new Asistencia(jugador, totalAsistencias));
+		        
+		    }
+
+
 		    tablaAsistencias.sort(Comparator.comparingInt(Asistencia::getAsistencias).reversed());
-	
+
 		    return tablaAsistencias;
 		}
 

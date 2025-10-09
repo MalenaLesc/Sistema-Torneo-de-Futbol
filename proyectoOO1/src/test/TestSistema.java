@@ -68,7 +68,7 @@ public class TestSistema {
         
         //Agregamos registros de jugadores
         partido1.agregarRegistro(j1, 1, 7, 90);
-        partido1.agregarRegistro(j4, 1, 0, 90);
+        partido1.agregarRegistro(j4, 1, 3, 90);
         partido2.agregarRegistro(j1, 2, 1, 90);
         partido2.agregarRegistro(j2, 1, 0, 85);
         
