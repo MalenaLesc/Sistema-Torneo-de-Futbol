@@ -2,7 +2,6 @@ package sistema;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Equipo {
@@ -76,8 +75,10 @@ public class Equipo {
 		}
 	
 	    public boolean agregarJugador(String apellido, String nombre, int dni, LocalDate fechaNacimiento, float estatura, float peso,
-	    		String posicion, int camiseta) {
-	    	
+	    		String posicion, int camiseta) throws Exception {
+	    	for(Jugador j : jugadores) {
+	    		if(dni == j.getDni()) throw new Exception("El jugador que se intenta agregar ya existe");
+	    	}
 	    	Jugador jug1 = new Jugador(apellido, nombre, dni, fechaNacimiento, estatura, peso, posicion, camiseta);
 	    	return jugadores.add(jug1);
 	    	

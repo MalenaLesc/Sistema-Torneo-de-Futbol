@@ -2,9 +2,7 @@ package sistema;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class Torneo {
@@ -109,12 +107,18 @@ public class Torneo {
 			this.partidos = partidos;
 		}
 	    
-	    public boolean agregarEquipo(String nombreEquipo, List<Jugador> jugadores, String idEquipo, Entrenador entrenador1, LocalDate fechaFundacion) {
+	    public boolean agregarEquipo(String nombreEquipo, List<Jugador> jugadores, String idEquipo, Entrenador entrenador1, LocalDate fechaFundacion) throws Exception {
+	    	for(Equipo e : equipos) {
+	    		if(idEquipo == e.getIdEquipo()) throw new Exception("El equipo que se intenta agregar ya esta en la lista");
+	    	}
 	    	Equipo equipo1 = new Equipo(nombreEquipo, idEquipo, jugadores, entrenador1, fechaFundacion);
 	    	return equipos.add(equipo1);
 	    }
 	    
-	    public boolean agregarPartido(LocalDate fechaPartido, Equipo local, Equipo visitante, String estadio, int idPartido, int golesLocal, int golesVisitante) {
+	    public boolean agregarPartido(LocalDate fechaPartido, Equipo local, Equipo visitante, String estadio, int idPartido, int golesLocal, int golesVisitante) throws Exception {
+	    	for(Partido p : partidos) {
+	    		if(idPartido == p.getIdPartido()) throw new Exception("El partidon que se intenta agregar ya esta en la lista");
+	    	}
 	    	Partido partido1 = new Partido(fechaPartido, local, visitante, estadio, idPartido, golesLocal, golesVisitante);
 	    	return partidos.add(partido1);
 	    }
